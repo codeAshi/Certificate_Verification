@@ -1,0 +1,43 @@
+/* Full page gradient background */
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Card styling */
+.card {
+  border-radius: 15px;
+  border: none;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Button styling */
+.btn {
+  border-radius: 8px;
+}
+
+/* Success & error animation */
+.alert {
+  border-radius: 10px;
+}
+
+/* Smooth inputs */
+.form-control {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.8);
+  border-color: #667eea;
+}
