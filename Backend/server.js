@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://Ashish:Ashish3204@cluster0.fc6idkv.mongodb.net/certificatesDB?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://USER_NAME:PASSWORDfc6idkv.mongodb.net/certificatesDB?retryWrites=true&w=majority")
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 const authRoutes = require("./routes/AuthRoutes");
