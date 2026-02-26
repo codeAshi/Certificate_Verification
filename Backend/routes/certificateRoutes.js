@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Certificate = require("../models/Certificate");
-const { verifyToken, verifyAdmin } = require("../middleware/authMiddleware");
+const { verifyToken } = require("../middleware/authMiddleware");
 
 // 🔐 Add Certificate (Admin Only)
-router.post("/add", verifyToken, verifyAdmin, async (req, res) => {
+router.post("/add", verifyToken, async (req, res) => {
   try {
     const newCertificate = new Certificate(req.body);
     await newCertificate.save();

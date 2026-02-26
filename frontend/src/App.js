@@ -90,17 +90,27 @@ const handleSubmit = async () => {
   if (loggedIn === "user") {
   
   const addCertificate = async () => {
-    try {
-      await axios.post(
-        "http://localhost:5000/api/certificates/add",
-        formData
-      );
-      alert("Certificate Added ✅");
-    } catch {
-      alert("Failed to add certificate ❌");
-    }
-  };
+  try {
 
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      "http://localhost:5000/api/certificates/add",
+      certificateForm,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    alert("Certificate Added ✅");
+
+  } catch (err) {
+    console.log(err.response?.data);
+    alert("Failed to add certificate ❌");
+  }
+};
   const searchCertificate = async () => {
     try {
       const res = await axios.get(
