@@ -26,11 +26,6 @@ function App() {
 
   const [searchId, setSearchId] = useState("");
   const [certificate, setCertificate] = useState(null);
-   const [adminSection, setAdminSection] = React.useState("dashboard");
-  const [users, setUsers] = React.useState([]);
-  const [certificates, setCertificates] = React.useState([]);
-
-  
   /* ================= HANDLE LOGIN ================= */
 
   const handleSubmit = async () => {
@@ -88,7 +83,17 @@ function App() {
   /* ================= DASHBOARDS ================= */
 
   if (loggedIn === "user") {
-  
+  const [section, setSection] = React.useState("dashboard");
+  const [formData, setFormData] = React.useState({
+    certificateId: "",
+    studentName: "",
+    internshipDomain: "",
+    startDate: "",
+    endDate: ""
+  });
+  const [searchId, setSearchId] = React.useState("");
+  const [certificate, setCertificate] = React.useState(null);
+
   const addCertificate = async () => {
     try {
       await axios.post(
@@ -254,73 +259,26 @@ function App() {
   );
 }
 
-if (loggedIn === "admin") {
-
- 
-  const token = localStorage.getItem("token");
-
-  const fetchUsers = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:5000/api/admin/users",
-        {
-          headers: { Authorization: token }
-        }
-      );
-      setUsers(res.data);
-    } catch {
-      alert("Failed to load users ❌");
-    }
-  };
-
-  const fetchCertificates = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:5000/api/admin/certificates",
-        {
-          headers: { Authorization: token }
-        }
-      );
-      setCertificates(res.data);
-    } catch {
-      alert("Failed to load certificates ❌");
-    }
-  };
-
+  if (loggedIn === "admin") {
   return (
     <div className="d-flex">
       {/* Sidebar */}
       <div
         className="bg-dark text-white p-3"
-        style={{ width: "230px", minHeight: "100vh" }}
+        style={{ width: "220px", minHeight: "100vh" }}
       >
-        <h4>Admin Panel 👑</h4>
+        <h4>Admin Panel</h4>
         <hr />
 
-        <button
-          className="btn btn-link text-white w-100 text-start"
-          onClick={() => setAdminSection("dashboard")}
-        >
+        <button className="btn btn-link text-white w-100 text-start">
           Dashboard
         </button>
 
-        <button
-          className="btn btn-link text-white w-100 text-start"
-          onClick={() => {
-            setAdminSection("users");
-            fetchUsers();
-          }}
-        >
+        <button className="btn btn-link text-white w-100 text-start">
           Manage Users
         </button>
 
-        <button
-          className="btn btn-link text-white w-100 text-start"
-          onClick={() => {
-            setAdminSection("certificates");
-            fetchCertificates();
-          }}
-        >
+        <button className="btn btn-link text-white w-100 text-start">
           Certificates
         </button>
 
@@ -334,75 +292,13 @@ if (loggedIn === "admin") {
 
       {/* Main Content */}
       <div className="container p-4">
-
-        {adminSection === "dashboard" && (
-          <div className="card p-4 shadow">
-            <h3>Welcome Admin 👑</h3>
-            <p>Use sidebar to manage users and certificates.</p>
-          </div>
-        )}
-
-        {adminSection === "users" && (
-          <div className="card p-4 shadow">
-            <h4>All Users</h4>
-            <table className="table mt-3">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((u) => (
-                  <tr key={u._id}>
-                    <td>{u.name}</td>
-                    <td>{u.email}</td>
-                    <td>
-                      <span className={
-                        u.role === "admin"
-                          ? "badge bg-danger"
-                          : "badge bg-primary"
-                      }>
-                        {u.role}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        {adminSection === "certificates" && (
-          <div className="card p-4 shadow">
-            <h4>All Certificates</h4>
-
-            <table className="table mt-3">
-              <thead>
-                <tr>
-                  <th>Certificate ID</th>
-                  <th>Student</th>
-                  <th>Domain</th>
-                </tr>
-              </thead>
-              <tbody>
-                {certificates.map((c) => (
-                  <tr key={c._id}>
-                    <td>{c.certificateId}</td>
-                    <td>{c.studentName}</td>
-                    <td>{c.internshipDomain}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-
+        <h2>Welcome Admin 👑</h2>
+        <p>Here you can manage users and certificates.</p>
       </div>
     </div>
   );
 }
+
   /* ================= LOGIN / REGISTER UI ================= */
 
   return (
@@ -437,16 +333,16 @@ if (loggedIn === "admin") {
         </div>
 
         {/* NAME FIELD (REGISTER ONLY) */}
-       {mode === "register" && (
-  <input
-    type="text"
-    placeholder="Full Name"
-    onChange={(e) =>
-      setFormData({ ...formData, name: e.target.value })
-    }
-  />
-)}
-         
+        {mode === "register" && (
+          <input
+            type="text"
+            className="form-control mb-3"
+            placeholder="Full Name"
+            onChange={(e) =>
+              setFormData({ ...formData, name: e.target.value })
+            }
+          />
+        )}
 
         {/* EMAIL */}
         <input
