@@ -32,59 +32,59 @@ function App() {
 
   
   /* ================= HANDLE LOGIN ================= */
-
-  const handleSubmit = async () => {
-    try {
-     if (mode === "register") {
+const handleSubmit = async () => {
   try {
-    await axios.post(
-      "http://localhost:5000/api/auth/register",
-      {
-        ...formData,
-        role: "user"
-      }
-    );
 
-    alert("Registration Successful ✅");
-
-    // Automatically switch to user login
-    setMode("user");
-
-    // Clear name & password, keep email
-    setFormData({
-      name: "",
-      email: formData.email,
-      password: ""
-    });
-
-  } catch {
-    alert("Registration Failed ❌");
-  }
-
-  return;
-}
-
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+    // 🔹 REGISTER
+    if (mode === "register") {
+      await axios.post(
+        "http://localhost:5000/api/auth/register",
         {
-          email: formData.email,
-          password: formData.password
+          ...formData,
+          role: "user"
         }
       );
 
-      if (res.data.role !== mode) {
-        alert(`Please login using ${res.data.role} section ❌`);
-        return;
-      }
+      alert("Registration Successful ✅");
 
-      setLoggedIn(mode);
-      alert(`${mode.toUpperCase()} Login Successful ✅`);
+      setMode("user");
 
-    } catch {
-      alert("Operation Failed ❌");
+      setFormData({
+        name: "",
+        email: formData.email,
+        password: ""
+      });
+
+      return;
     }
-  };
 
+    // 🔹 LOGIN
+    const res = await axios.post(
+      "http://localhost:5000/api/auth/login",
+      {
+        email: formData.email,
+        password: formData.password
+      }
+    );
+
+    if (res.data.role !== mode) {
+      alert(`Please login using ${res.data.role} section ❌`);
+      return;
+    }
+
+    // ✅ Save token
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("role", res.data.role);
+
+    // ✅ Set login state
+    setLoggedIn(res.data.role);
+
+    alert(`${res.data.role.toUpperCase()} Login Successful ✅`);
+
+  } catch (error) {
+    alert("Operation Failed ❌");
+  }
+};
   /* ================= DASHBOARDS ================= */
 
   if (loggedIn === "user") {
@@ -259,26 +259,30 @@ if (loggedIn === "admin") {
  
   const token = localStorage.getItem("token");
 
-  const fetchUsers = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:5000/api/admin/users",
-        {
-          headers: { Authorization: token }
-        }
-      );
-      setUsers(res.data);
-    } catch {
-      alert("Failed to load users ❌");
-    }
-  };
+ const fetchUsers = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await axios.get(
+      "http://localhost:5000/api/admin/users",
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+
+    setUsers(res.data);
+
+  } catch (err) {
+    alert("Failed to load users ❌");
+  }
+};
 
   const fetchCertificates = async () => {
     try {
       const res = await axios.get(
         "http://localhost:5000/api/admin/certificates",
         {
-          headers: { Authorization: token }
+          headers: { Authorization: `Bearer ${token}` }
         }
       );
       setCertificates(res.data);
