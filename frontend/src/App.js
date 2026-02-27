@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -29,8 +29,36 @@ function App() {
    const [adminSection, setAdminSection] = React.useState("dashboard");
   const [users, setUsers] = React.useState([]);
   const [certificates, setCertificates] = React.useState([]);
+  //Dashboard Information
+const [stats, setStats] = React.useState({
+  totalUsers: 0,
+  totalAdmins: 0,
+  totalCertificates: 0
+});
+  // ✅ FUNCTIONS
+  const fetchStats = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-  
+      const res = await axios.get(
+        "http://localhost:5000/api/admin/stats",
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      setStats(res.data);
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+// ✅ useEffect MUST BE HERE
+  useEffect(() => {
+    if (loggedIn === "admin") {
+      fetchStats();
+    }
+  }, [loggedIn]);
   /* ================= HANDLE LOGIN ================= */
 const handleSubmit = async () => {
   try {
@@ -124,11 +152,31 @@ const handleSubmit = async () => {
     }
   };
 
-  const downloadCertificate = () => {
-    window.open(
-      `http://localhost:5000/api/certificates/download/${searchId}`
+  const downloadCertificate = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await axios.get(
+      `http://localhost:5000/api/certificates/download/${searchId}`,
+      {
+        responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${token}`  // VERY IMPORTANT
+        }
+      }
     );
-  };
+
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `certificate-${searchId}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+
+  } catch (error) {
+    alert("Download Failed ❌");
+  }
+};
 
   return (
     <div className="d-flex">
@@ -288,7 +336,6 @@ const handleSubmit = async () => {
 
 if (loggedIn === "admin") {
 
- 
   const token = localStorage.getItem("token");
 
  const fetchUsers = async () => {
@@ -322,6 +369,24 @@ if (loggedIn === "admin") {
       alert("Failed to load certificates ❌");
     }
   };
+  const fetchStats = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await axios.get(
+      "http://localhost:5000/api/admin/stats",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    setStats(res.data);
+  } catch {
+    alert("Failed to load stats ❌");
+  }
+};
   const deleteUser = async (id) => {
   try {
     const token = localStorage.getItem("token");
@@ -376,7 +441,10 @@ const deleteCertificate = async (id) => {
 
         <button
           className="btn btn-link text-white w-100 text-start"
-          onClick={() => setAdminSection("dashboard")}
+         onClick={() => {
+  setAdminSection("dashboard");
+  fetchStats();
+}}
         >
           Dashboard
         </button>
@@ -413,10 +481,48 @@ const deleteCertificate = async (id) => {
       <div className="container p-4">
 
         {adminSection === "dashboard" && (
-          <div className="card p-4 shadow">
-            <h3>Welcome Admin 👑</h3>
-            <p>Use sidebar to manage users and certificates.</p>
-          </div>
+  <div className="row g-4 mt-3">
+
+  <div className="col-md-4">
+    <div className="premium-card users-card">
+      <div className="card-content">
+        <div>
+          <p>Total Users</p>
+          <h2>{stats.totalUsers}</h2>
+        </div>
+        <div className="card-icon">👥</div>
+      </div>
+      <div className="card-glow"></div>
+    </div>
+  </div>
+
+  <div className="col-md-4">
+    <div className="premium-card admins-card">
+      <div className="card-content">
+        <div>
+          <p>Total Admins</p>
+          <h2>{stats.totalAdmins}</h2>
+        </div>
+        <div className="card-icon">👑</div>
+      </div>
+      <div className="card-glow"></div>
+    </div>
+  </div>
+
+  <div className="col-md-4">
+    <div className="premium-card cert-card">
+      <div className="card-content">
+        <div>
+          <p>Total Certificates</p>
+          <h2>{stats.totalCertificates}</h2>
+        </div>
+        <div className="card-icon">📄</div>
+      </div>
+      <div className="card-glow"></div>
+    </div>
+  </div>
+
+</div>
         )}
 
         {adminSection === "users" && (

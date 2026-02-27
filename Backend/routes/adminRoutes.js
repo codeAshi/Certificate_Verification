@@ -39,7 +39,22 @@ router.delete("/users/:id", verifyToken, verifyAdmin, async (req, res) => {
   }
 });
 
+// ================= DASHBOARD STATS =================
+router.get("/stats", verifyToken, verifyAdmin, async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalAdmins = await User.countDocuments({ role: "admin" });
+    const totalCertificates = await Certificate.countDocuments();
 
+    res.json({
+      totalUsers,
+      totalAdmins,
+      totalCertificates
+    });
+  } catch {
+    res.status(500).json({ message: "Failed to load stats" });
+  }
+});
 // ================= DELETE CERTIFICATE =================
 router.delete("/certificates/:id", verifyToken, verifyAdmin, async (req, res) => {
   try {
@@ -49,5 +64,19 @@ router.delete("/certificates/:id", verifyToken, verifyAdmin, async (req, res) =>
     res.status(500).json({ message: "Delete Failed" });
   }
 });
+// ================= ADMIN STATS =================
+router.get("/stats", verifyToken, verifyAdmin, async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalCertificates = await Certificate.countDocuments();
 
+    res.json({
+      totalUsers,
+      totalCertificates
+    });
+
+  } catch (err) {
+    res.status(500).json({ message: "Failed to load stats" });
+  }
+});
 module.exports = router;

@@ -1,43 +1,220 @@
-/* Full page gradient background */
+/* ===== Modern SaaS Background ===== */
 body {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #0f172a, #1e293b);
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #f8fafc;
 }
 
-/* Navbar styling */
+/* ===== Navbar ===== */
 .navbar {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
 }
 
-/* Card styling */
+/* ===== Glass Card Base ===== */
 .card {
-  border-radius: 15px;
-  border: none;
-  transition: transform 0.2s ease-in-out;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+  transition: all 0.3s ease;
+  color: white;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
 }
 
-/* Button styling */
+/* ===== Buttons ===== */
 .btn {
-  border-radius: 8px;
-}
-
-/* Success & error animation */
-.alert {
   border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-/* Smooth inputs */
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* ===== Alerts ===== */
+.alert {
+  border-radius: 15px;
+}
+
+/* ===== Inputs ===== */
 .form-control {
-  border-radius: 8px;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
 }
 
 .form-control:focus {
-  box-shadow: 0 0 8px rgba(102, 126, 234, 0.8);
-  border-color: #667eea;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.8);
+  border-color: #6366f1;
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
+
+/* ===== PREMIUM STAT CARDS ===== */
+.modern-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  border-radius: 20px;
+  overflow: hidden;
+  color: white;
+  font-weight: 500;
+  transition: all 0.35s ease;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+.modern-card:hover {
+  transform: translateY(-12px) scale(1.02);
+}
+
+/* Icon Style */
+.modern-card .icon {
+  font-size: 38px;
+  opacity: 0.9;
+}
+
+/* Glow Light */
+.modern-card::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent);
+  top: -50px;
+  right: -50px;
+  opacity: 0.4;
+}
+
+/* Premium Gradient Themes */
+.modern-card.users {
+  background: linear-gradient(135deg, #6366f1, #3730a3);
+}
+
+.modern-card.admins {
+  background: linear-gradient(135deg, #f43f5e, #7f1d1d);
+}
+
+.modern-card.certificates {
+  background: linear-gradient(135deg, #10b981, #065f46);
+}
+
+/* Text Styling */
+.modern-card p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.75;
+  letter-spacing: 0.5px;
+}
+
+.modern-card h2 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+}
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  padding: 30px 18px;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  color: #f8fafc;
+  box-shadow: 8px 0 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15px 0 25px;
+}
+
+/* ================= LINKS ================= */
+
+.sidebar-link {
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #cbd5e1;
+  font-weight: 500;
+  position: relative;
+}
+
+.sidebar-link:hover {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  transform: translateX(5px);
+}
+
+/* ================= ACTIVE GLOW ================= */
+
+.sidebar-link.active {
+  background: rgba(99, 102, 241, 0.2);
+  color: #6366f1;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+  text-shadow: 0 0 8px #6366f1;
+}
+
+/* Animated left glow indicator */
+.sidebar-link.active::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background: #6366f1;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #6366f1;
+}
+
+/* ================= LOGOUT ================= */
+
+.sidebar-link.logout {
+  margin-top: 40px;
+  color: #f87171;
+}
+
+.sidebar-link.logout:hover {
+  background: rgba(248, 113, 113, 0.15);
+  transform: translateX(5px);
+}
+
+/* ================= PAGE TRANSITION ================= */
+
+.container {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
