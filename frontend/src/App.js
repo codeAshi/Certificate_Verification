@@ -340,6 +340,32 @@ if (mode === "register-user" || mode === "register-admin") {
 if (loggedIn === "admin") {
 
   const token = localStorage.getItem("token");
+  const handleBulkUpload = async (file) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    await axios.post(
+      "http://localhost:5000/api/admin/bulk-upload",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data"
+        }
+      }
+    );
+
+    alert("Bulk Upload Successful ✅");
+    fetchStats();
+  }catch (error) {
+  console.log("STATUS:", error.response?.status);
+  console.log("DATA:", error.response?.data);
+  alert("Upload Failed ❌");
+}
+};
 
  const fetchUsers = async () => {
   try {
@@ -523,8 +549,66 @@ const deleteCertificate = async (id) => {
       </div>
       <div className="card-glow"></div>
     </div>
+  </div>{/* CENTER BULK SECTION */}
+<div className="d-flex flex-column align-items-center mt-5">
+
+  {/* BIG UPLOAD BUTTON */}
+  <label
+    style={{
+      padding: "18px 45px",
+      background: "linear-gradient(to right, #4e8ccf, #7b3fa0)",
+      color: "white",
+      fontSize: "18px",
+      borderRadius: "12px",
+      cursor: "pointer",
+      boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px"
+    }}
+  >
+    📤 Upload Bulk Certificates
+
+    <input
+      type="file"
+      accept=".xlsx,.xls"
+      hidden
+      onChange={(e) =>
+        handleBulkUpload(e.target.files[0])
+      }
+    />
+  </label>
+
+  {/* FORMAT CARD */}
+  <div
+    className="card mt-4 p-4 shadow"
+    style={{
+      width: "100%",
+      maxWidth: "650px"
+    }}
+  >
+    <h6 className="mb-3">📄 Excel Format Required</h6>
+
+    <div className="table-responsive">
+      <table className="table table-bordered text-center table-sm">
+        <thead className="table-dark">
+          <tr>
+            <th>certificateId</th>
+            <th>studentName</th>
+            <th>internshipDomain</th>
+            <th>startDate</th>
+            <th>endDate</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <small className="text-muted">
+      ⚠️ Column names must match exactly (case-sensitive).
+    </small>
   </div>
 
+</div>
 </div>
         )}
 

@@ -5,6 +5,16 @@ const User = require("../models/User");
 const Certificate = require("../models/Certificate");
 
 const { verifyToken, verifyAdmin } = require("../middleware/authMiddleware");
+const { bulkUpload } = require("../controllers/adminController");
+
+// const upload = multer({ dest: "uploads/" });
+
+// router.post(
+//   "/bulk-upload",
+//   verifyToken,
+//   upload.single("file"),
+//   bulkUpload
+// );
 
 
 // ================= GET ALL USERS =================
