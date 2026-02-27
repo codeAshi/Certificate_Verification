@@ -85,6 +85,7 @@ const handleSubmit = async () => {
     alert("Operation Failed ❌");
   }
 };
+
   /* ================= DASHBOARDS ================= */
 
   if (loggedIn === "user") {
@@ -184,39 +185,60 @@ const handleSubmit = async () => {
           <div className="card p-4 shadow">
             <h4>Add Certificate</h4>
 
-            <input className="form-control mb-3"
+                  <input
+              className="form-control mb-3"
               placeholder="Certificate ID"
               onChange={(e) =>
-                setFormData({ ...formData, certificateId: e.target.value })
+                setCertificateForm({
+                  ...certificateForm,
+                  certificateId: e.target.value
+                })
               }
             />
 
-            <input className="form-control mb-3"
+            <input
+              className="form-control mb-3"
               placeholder="Student Name"
               onChange={(e) =>
-                setFormData({ ...formData, studentName: e.target.value })
+                setCertificateForm({
+                  ...certificateForm,
+                  studentName: e.target.value
+                })
               }
             />
 
-            <input className="form-control mb-3"
+            <input
+              className="form-control mb-3"
               placeholder="Internship Domain"
               onChange={(e) =>
-                setFormData({ ...formData, internshipDomain: e.target.value })
+                setCertificateForm({
+                  ...certificateForm,
+                  internshipDomain: e.target.value
+                })
               }
             />
 
-            <input type="date" className="form-control mb-3"
+            <input
+              type="date"
+              className="form-control mb-3"
               onChange={(e) =>
-                setFormData({ ...formData, startDate: e.target.value })
+                setCertificateForm({
+                  ...certificateForm,
+                  startDate: e.target.value
+                })
               }
             />
 
-            <input type="date" className="form-control mb-3"
+            <input
+              type="date"
+              className="form-control mb-3"
               onChange={(e) =>
-                setFormData({ ...formData, endDate: e.target.value })
+                setCertificateForm({
+                  ...certificateForm,
+                  endDate: e.target.value
+                })
               }
             />
-
             <button
               className="btn btn-success"
               onClick={addCertificate}
@@ -300,6 +322,47 @@ if (loggedIn === "admin") {
       alert("Failed to load certificates ❌");
     }
   };
+  const deleteUser = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.delete(
+      `http://localhost:5000/api/admin/users/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    fetchUsers(); // refresh table
+
+  } catch (err) {
+    console.log(err.response?.data);
+    alert("Delete Failed ❌");
+  }
+};
+
+const deleteCertificate = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.delete(
+      `http://localhost:5000/api/admin/certificates/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    fetchCertificates(); // refresh table
+
+  } catch (err) {
+    console.log(err.response?.data);
+    alert("Delete Failed ❌");
+  }
+};
 
   return (
     <div className="d-flex">
@@ -365,6 +428,7 @@ if (loggedIn === "admin") {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Role</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -381,7 +445,17 @@ if (loggedIn === "admin") {
                         {u.role}
                       </span>
                     </td>
-                  </tr>
+                    
+                    <td>
+          
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => deleteUser(u._id)}
+        >
+          Delete
+        </button>
+      </td>
+                        </tr>
                 ))}
               </tbody>
             </table>
@@ -398,6 +472,8 @@ if (loggedIn === "admin") {
                   <th>Certificate ID</th>
                   <th>Student</th>
                   <th>Domain</th>
+                  <th>Action</th>
+                  <th>View</th>
                 </tr>
               </thead>
               <tbody>
@@ -406,6 +482,14 @@ if (loggedIn === "admin") {
                     <td>{c.certificateId}</td>
                     <td>{c.studentName}</td>
                     <td>{c.internshipDomain}</td>
+                    <td>
+  <button
+    className="btn btn-danger btn-sm"
+    onClick={() => deleteCertificate(c._id)}
+  >
+    Delete
+  </button>
+</td>
                   </tr>
                 ))}
               </tbody>
