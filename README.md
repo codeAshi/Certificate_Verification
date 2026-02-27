@@ -1,181 +1,62 @@
-🎓 Blockchain-Based Certificate Verification System
+# 🎓 Blockchain Certificate Verification System
 
-⚠️ WORK IN PROGRESS
+> 🚧 **Work in Progress**  
+> This project is under active development. Features and UI may change.
 
-This project is currently under active development.
-Features, UI design, APIs, and structure may change.
-Some modules may be incomplete or under improvement.
+A MERN stack web application for secure certificate issuance and verification.
 
-📌 Overview
+---
 
-A full-stack MERN-based web application for secure certificate issuance and verification.
+## 🚀 Features
 
-The system enables:
+- 🔐 Admin Login (JWT Authentication)
+- 📂 Bulk Certificate Upload (Excel)
+- 🏷 Unique Certificate ID Generation
+- 🔎 Verify Certificate by ID
+- 📦 MongoDB Database Integration
+- 🌐 Responsive React UI
 
-👑 Admin authentication
+---
 
-📂 Bulk certificate upload via Excel
+## 🛠 Tech Stack
 
-🔎 Instant certificate verification
+### Frontend
+- React.js  
+- Axios  
+- Bootstrap  
 
-🏷 Unique certificate ID generation
+### Backend
+- Node.js  
+- Express.js  
+- MongoDB  
+- Mongoose  
 
-🛡 Secure role-based access
+---
 
-The project is continuously being improved with better UI/UX, stronger security, and optimized performance.
+## ⚙️ Installation Guide
 
-⚙️ System Requirements
-
-Before running the project, ensure your system has:
-
-✅ Node.js
-
-✅ npm
-
-✅ MongoDB (Local) or MongoDB Atlas account
-
-✅ Git (Optional but recommended)
-
-🚀 How to Run the Project
-🔹 1️⃣ Setup Backend
-
-Open terminal and go to backend folder:
-
+### 1️⃣ Clone Repository
+```
+https://github.com/codeAshi/Certificate_Verification
+```
+###2️⃣ Setup Backend
+```
 cd Backend
-
-Install dependencies:
-
 npm install
-
-Start backend server:
-
 node server.js
-
-You should see:
-
-Server running on port 5000
-MongoDB connected
-🔹 2️⃣ Setup Frontend
-
-Open a new terminal.
-
-Go to frontend folder:
-
+```
+Backend runs on:
+http://localhost:5000
+###3️⃣ Setup Frontend
+```
 cd frontend
-
-Install dependencies:
-
 npm install
-
-Start React app:
-
 npm start
-
-Application will run on:
-
-http://localhost:3000
-✨ Features
-
-🔐 Admin Authentication System
-
-📂 Bulk Certificate Upload via Excel
-
-🏷 Unique Certificate ID Generation
-
-🔎 Instant Certificate Verification
-
-📦 MongoDB Integration
-
-🌐 Responsive React UI
-
-🛡 Protected Backend Routes (JWT)
-
-🎨 UI Enhancements (In Progress)
-
-Currently improving:
-
-✅ Cleaner Admin Dashboard Layout
-
-✅ Modern Card-Based Certificate Display
-
-🔄 Improved Mobile Responsiveness
-
-🔄 Better Form Validation UI
-
-🔄 Enhanced Alerts & Loading Indicators
-
-🔄 Improved Typography & Color System
-
-🚀 Upcoming Features
-
-🌙 Dark / Light Mode Toggle
-
-📱 QR Code Based Verification
-
-✨ Smooth Animations & Transitions
-
-📊 Admin Analytics Dashboard
-
-🧾 Certificate PDF Redesign
-
-🏗️ Tech Stack
-🔹 Frontend
-
-React.js
-
-Axios
-
-Bootstrap / Custom CSS
-
-🔹 Backend
-
-Node.js
-
-Express.js
-
-MongoDB
-
-Mongoose
-
-JWT Authentication
-
-🔹 Tools
-
-Git & GitHub
-
-Postman (API Testing)
-
-📄 Excel Format for Bulk Upload
-
-Excel file must include the following headers exactly:
-
-| certificateId | studentName | internshipDomain | startDate | endDate |
-
-⚠️ Column names are case-sensitive.
-
-📁 Project Structure
-certificate-verificatiom/
-│
-├── Backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── models/
-│   ├── middleware/
-│   └── server.js
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
-└── README.md
-👨‍💻 Author
+```
+Frontend runs on:
+http://local👨‍💻 Author
 
 Ashish Bedare
 B.Tech Computer Engineering
 
-⭐ Support
-
-If you like this project:
-
-Give it a ⭐ on GitHub!
+⭐ If you like this project, give it a star on GitHub!host:3000
