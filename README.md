@@ -1,76 +1,181 @@
-# 🎓 Blockchain-Based Certificate Verification System
+🎓 Blockchain-Based Certificate Verification System
 
-> ⚠️ **WARNING: WORK IN PROGRESS**
->
-> This project is currently under active development.  
-> Features, UI design, and APIs may change frequently.  
-> Some functionalities may be incomplete or undergoing improvements.
+⚠️ WORK IN PROGRESS
 
----
+This project is currently under active development.
+Features, UI design, APIs, and structure may change.
+Some modules may be incomplete or under improvement.
 
-A full-stack MERN application for secure certificate issuance and verification.  
-This project is actively being enhanced with improved UI/UX, performance optimization, and stronger security implementation.
+📌 Overview
 
----
+A full-stack MERN-based web application for secure certificate issuance and verification.
 
-## 🚀 Project Status
+The system enables:
 
-🟢 Actively Under Development  
-🎨 Currently upgrading UI for a modern and professional look  
-⚡ Improving backend performance and validation  
-🔐 Strengthening authentication and protected routes  
+👑 Admin authentication
 
----
+📂 Bulk certificate upload via Excel
 
-## ✨ Features
+🔎 Instant certificate verification
 
-- 🔐 Admin Authentication System (Login)
-- 📂 Bulk Student Certificate Upload via Excel
-- 🏷 Unique Certificate ID Generation
-- 🔎 Instant Certificate Verification by ID
-- 📦 MongoDB Database Integration
-- 🌐 Responsive React Frontend
-- 🛡 Protected Backend Routes
+🏷 Unique certificate ID generation
 
----
+🛡 Secure role-based access
 
-## 🎨 UI Enhancements (In Progress)
+The project is continuously being improved with better UI/UX, stronger security, and optimized performance.
 
-We are currently working on:
+⚙️ System Requirements
 
-- ✅ Cleaner Admin Dashboard Layout  
-- ✅ Modern Card-Based Certificate Display  
-- 🔄 Improved Mobile Responsiveness  
-- 🔄 Better Form Validation UI  
-- 🔄 Improved Alerts & Loading Indicators  
-- 🔄 Enhanced Color Scheme & Typography  
+Before running the project, ensure your system has:
 
-### Upcoming UI Features
+✅ Node.js
 
-- 🌙 Dark / Light Mode Toggle  
-- 📱 QR Code Based Verification  
-- ✨ Smooth Animations & Transitions  
-- 📊 Admin Analytics Panel  
+✅ npm
 
----
+✅ MongoDB (Local) or MongoDB Atlas account
 
-## 🏗️ Tech Stack
+✅ Git (Optional but recommended)
 
-### Frontend
-- React.js
-- Axios
-- Bootstrap / Custom CSS
+🚀 How to Run the Project
+🔹 1️⃣ Setup Backend
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
+Open terminal and go to backend folder:
 
-### Tools
-- Git & GitHub
-- Postman (API Testing)
+cd Backend
 
----
+Install dependencies:
 
-## 📂 Project Structure
+npm install
+
+Start backend server:
+
+node server.js
+
+You should see:
+
+Server running on port 5000
+MongoDB connected
+🔹 2️⃣ Setup Frontend
+
+Open a new terminal.
+
+Go to frontend folder:
+
+cd frontend
+
+Install dependencies:
+
+npm install
+
+Start React app:
+
+npm start
+
+Application will run on:
+
+http://localhost:3000
+✨ Features
+
+🔐 Admin Authentication System
+
+📂 Bulk Certificate Upload via Excel
+
+🏷 Unique Certificate ID Generation
+
+🔎 Instant Certificate Verification
+
+📦 MongoDB Integration
+
+🌐 Responsive React UI
+
+🛡 Protected Backend Routes (JWT)
+
+🎨 UI Enhancements (In Progress)
+
+Currently improving:
+
+✅ Cleaner Admin Dashboard Layout
+
+✅ Modern Card-Based Certificate Display
+
+🔄 Improved Mobile Responsiveness
+
+🔄 Better Form Validation UI
+
+🔄 Enhanced Alerts & Loading Indicators
+
+🔄 Improved Typography & Color System
+
+🚀 Upcoming Features
+
+🌙 Dark / Light Mode Toggle
+
+📱 QR Code Based Verification
+
+✨ Smooth Animations & Transitions
+
+📊 Admin Analytics Dashboard
+
+🧾 Certificate PDF Redesign
+
+🏗️ Tech Stack
+🔹 Frontend
+
+React.js
+
+Axios
+
+Bootstrap / Custom CSS
+
+🔹 Backend
+
+Node.js
+
+Express.js
+
+MongoDB
+
+Mongoose
+
+JWT Authentication
+
+🔹 Tools
+
+Git & GitHub
+
+Postman (API Testing)
+
+📄 Excel Format for Bulk Upload
+
+Excel file must include the following headers exactly:
+
+| certificateId | studentName | internshipDomain | startDate | endDate |
+
+⚠️ Column names are case-sensitive.
+
+📁 Project Structure
+certificate-verificatiom/
+│
+├── Backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── models/
+│   ├── middleware/
+│   └── server.js
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+└── README.md
+👨‍💻 Author
+
+Ashish Bedare
+B.Tech Computer Engineering
+
+⭐ Support
+
+If you like this project:
+
+Give it a ⭐ on GitHub!
