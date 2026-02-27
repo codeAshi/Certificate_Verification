@@ -63,28 +63,31 @@ const [stats, setStats] = React.useState({
 const handleSubmit = async () => {
   try {
 
-    // 🔹 REGISTER
-    if (mode === "register") {
-      await axios.post(
-        "http://localhost:5000/api/auth/register",
-        {
-          ...formData,
-          role: "user"
-        }
-      );
+   // 🔹 REGISTER
+if (mode === "register-user" || mode === "register-admin") {
 
-      alert("Registration Successful ✅");
+  const role =
+    mode === "register-admin" ? "admin" : "user";
 
-      setMode("user");
-
-      setFormData({
-        name: "",
-        email: formData.email,
-        password: ""
-      });
-
-      return;
+  await axios.post(
+    "http://localhost:5000/api/auth/register",
+    {
+      ...formData,
+      role: role   // ✅ dynamic role
     }
+  );
+
+  alert(`${role.toUpperCase()} Registration Successful ✅`);
+
+  setMode(role); // switch to login mode
+  setFormData({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  return;
+}
 
     // 🔹 LOGIN
     const res = await axios.post(
@@ -609,88 +612,138 @@ const deleteCertificate = async (id) => {
 }
   /* ================= LOGIN / REGISTER UI ================= */
 
-  return (
-    <div className="container mt-5" style={{ maxWidth: "500px" }}>
-      <div className="card p-4 shadow">
-        <h3 className="text-center mb-4">
-          🎓 Certificate Portal
-        </h3>
+ 
+    return (
+  <div
+    style={{
+      height: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "linear-gradient(to right, #4e8ccf, #7b3fa0)",
+    }}
+  >
+    <div
+      style={{
+        width: "400px",
+        background: "#e6e6e6",
+        padding: "40px 30px",
+        borderRadius: "15px",
+        textAlign: "center",
+      }}
+    >
+      <h2 className="mb-4">Login</h2>
 
-        {/* MODE BUTTONS */}
-        <div className="d-flex justify-content-between mb-4">
-          <button
-            className={`btn ${mode === "user" ? "btn-primary" : "btn-outline-primary"}`}
-            onClick={() => setMode("user")}
-          >
-            User
-          </button>
+      {/* USER / ADMIN SELECT */}
+      <div className="d-flex justify-content-center gap-4 mb-4">
+        <button
+          className={`btn ${
+            mode === "user" ? "btn-primary" : "btn-outline-primary"
+          }`}
+          onClick={() => setMode("user")}
+        >
+          User
+        </button>
 
-          <button
-            className={`btn ${mode === "admin" ? "btn-dark" : "btn-outline-dark"}`}
-            onClick={() => setMode("admin")}
-          >
-            Admin
-          </button>
+        <button
+          className={`btn ${
+            mode === "admin" ? "btn-dark" : "btn-outline-dark"
+          }`}
+          onClick={() => setMode("admin")}
+        >
+          Admin
+        </button>
+      </div>
 
-          <button
-            className={`btn ${mode === "register" ? "btn-success" : "btn-outline-success"}`}
-            onClick={() => setMode("register")}
-          >
-            Register
-          </button>
-        </div>
-
-        {/* NAME FIELD (REGISTER ONLY) */}
-       {mode === "register" && (
+      {/* REGISTER NAME FIELD */}
+   {/* REGISTER NAME FIELD */}
+{(mode === "register-user" || mode === "register-admin") && (
   <input
     type="text"
     placeholder="Full Name"
+    className="form-control mb-3"
+    style={{
+      border: "none",
+      borderBottom: "2px solid gray",
+      background: "transparent",
+    }}
     onChange={(e) =>
       setFormData({ ...formData, name: e.target.value })
     }
   />
 )}
-         
+      {/* EMAIL */}
+      <input
+        type="email"
+        placeholder="Email"
+        className="form-control mb-3"
+        style={{
+          border: "none",
+          borderBottom: "2px solid gray",
+          background: "transparent",
+        }}
+        onChange={(e) =>
+          setFormData({ ...formData, email: e.target.value })
+        }
+      />
 
-        {/* EMAIL */}
-        <input
-          type="email"
-          className="form-control mb-3"
-          placeholder="Email"
-          onChange={(e) =>
-            setFormData({ ...formData, email: e.target.value })
-          }
-        />
+      {/* PASSWORD */}
+      <input
+        type="password"
+        placeholder="Password"
+        className="form-control mb-4"
+        style={{
+          border: "none",
+          borderBottom: "2px solid gray",
+          background: "transparent",
+        }}
+        onChange={(e) =>
+          setFormData({ ...formData, password: e.target.value })
+        }
+      />
 
-        {/* PASSWORD */}
-        <input
-          type="password"
-          className="form-control mb-3"
-          placeholder="Password"
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-        />
+      {/* LOGIN BUTTON */}
+      <button
+        style={{
+          width: "100%",
+          padding: "10px",
+          border: "none",
+          borderRadius: "5px",
+          background: "linear-gradient(to right, #4e8ccf, #7b3fa0)",
+          color: "white",
+          fontSize: "16px",
+          marginBottom: "15px",
+        }}
+        onClick={handleSubmit}
+      >
+      {mode === "admin"
+  ? "Admin Login"
+  : mode === "register-admin"
+  ? "Register Admin"
+  : mode === "register-user"
+  ? "Register User"
+  : "User Login"}
+      </button>
 
-        <button
-          className={`btn w-100 ${
-            mode === "admin"
-              ? "btn-dark"
-              : mode === "register"
-              ? "btn-success"
-              : "btn-primary"
-          }`}
-          onClick={handleSubmit}
-        >
-          {mode === "register"
-            ? "Register"
-            : mode === "admin"
-            ? "Admin Login"
-            : "User Login"}
-        </button>
-      </div>
+      {/* CREATE OPTIONS */}
+      {/* CREATE OPTIONS */}
+<div className="d-flex justify-content-between">
+  <span
+    style={{ cursor: "pointer", color: "#4e8ccf" }}
+    onClick={() => setMode("register-user")}
+  >
+    Create New User
+  </span>
+
+  <span
+    style={{ cursor: "pointer", color: "#4e8ccf" }}
+    onClick={() => setMode("register-admin")}
+  >
+    Create New Admin
+  </span>
+</div>
     </div>
-  );
+  </div>
+);
 }
-
 export default App;
