@@ -34,10 +34,11 @@ A MERN stack web application for secure certificate issuance and verification.
 ---
 
 ## ⚙️ Installation Guide
-
+make a new Folder for select the where you want project 
+Open terminal 
 ### 1️⃣ Clone Repository
 ```
-https://github.com/codeAshi/Certificate_Verification
+git clone https://github.com/codeAshi/Certificate_Verification
 ```
 ###2️⃣ Setup Backend
 ```
@@ -54,9 +55,9 @@ npm install
 npm start
 ```
 Frontend runs on:
-http://local👨‍💻 Author
-
+http://local
+👨‍💻 Author
 Ashish Bedare
 B.Tech Computer Engineering
 
-⭐ If you like this project, give it a star on GitHub!host:3000
+⭐ If you like this project, give it a star.
