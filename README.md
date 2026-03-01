@@ -40,7 +40,7 @@ Open terminal
 ```
 git clone https://github.com/codeAshi/Certificate_Verification
 ```
-###2️⃣ Setup Backend
+### 2️⃣ Setup Backend
 ```
 cd Backend
 npm install
@@ -48,7 +48,7 @@ node server.js
 ```
 Backend runs on:
 http://localhost:5000
-###3️⃣ Setup Frontend
+### 3️⃣ Setup Frontend
 ```
 cd frontend
 npm install
