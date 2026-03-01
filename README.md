@@ -55,7 +55,7 @@ npm install
 npm start
 ```
 Frontend runs on:
-http://local
+http://localhost:3000
 👨‍💻 Author
 Ashish Bedare
 B.Tech Computer Engineering
