@@ -39,6 +39,7 @@ class User(BaseModel, Base):
         backref="user",
         lazy='dynamic',
         cascade="all, delete, delete-orphan")
+    #constructor
 
     def __init__(self, *args, **kwargs):
         """
