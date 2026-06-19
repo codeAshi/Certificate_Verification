@@ -1,76 +1,63 @@
-# 🎓 Blockchain-Based Certificate Verification System
+# 🎓 Blockchain Certificate Verification System
 
-> ⚠️ **WARNING: WORK IN PROGRESS**
->
-> This project is currently under active development.  
-> Features, UI design, and APIs may change frequently.  
-> Some functionalities may be incomplete or undergoing improvements.
+> 🚧 **Work in Progress**  
+> This project is under active development. Features and UI may change.
 
----
-
-A full-stack MERN application for secure certificate issuance and verification.  
-This project is actively being enhanced with improved UI/UX, performance optimization, and stronger security implementation.
+A MERN stack web application for secure certificate issuance and verification.
 
 ---
 
-## 🚀 Project Status
+## 🚀 Features
 
-🟢 Actively Under Development  
-🎨 Currently upgrading UI for a modern and professional look  
-⚡ Improving backend performance and validation  
-🔐 Strengthening authentication and protected routes  
-
----
-
-## ✨ Features
-
-- 🔐 Admin Authentication System (Login)
-- 📂 Bulk Student Certificate Upload via Excel
+- 🔐 Admin Login (JWT Authentication)
+- 📂 Bulk Certificate Upload (Excel)
 - 🏷 Unique Certificate ID Generation
-- 🔎 Instant Certificate Verification by ID
+- 🔎 Verify Certificate by ID
 - 📦 MongoDB Database Integration
-- 🌐 Responsive React Frontend
-- 🛡 Protected Backend Routes
+- 🌐 Responsive React UI
 
 ---
 
-## 🎨 UI Enhancements (In Progress)
-
-We are currently working on:
-
-- ✅ Cleaner Admin Dashboard Layout  
-- ✅ Modern Card-Based Certificate Display  
-- 🔄 Improved Mobile Responsiveness  
-- 🔄 Better Form Validation UI  
-- 🔄 Improved Alerts & Loading Indicators  
-- 🔄 Enhanced Color Scheme & Typography  
-
-### Upcoming UI Features
-
-- 🌙 Dark / Light Mode Toggle  
-- 📱 QR Code Based Verification  
-- ✨ Smooth Animations & Transitions  
-- 📊 Admin Analytics Panel  
-
----
-
-## 🏗️ Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
-- React.js
-- Axios
-- Bootstrap / Custom CSS
+- React.js  
+- Axios  
+- Bootstrap  
 
 ### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-
-### Tools
-- Git & GitHub
-- Postman (API Testing)
+- Node.js  
+- Express.js  
+- MongoDB  
+- Mongoose  
 
 ---
 
-## 📂 Project Structure
+## ⚙️ Installation Guide
+make a new Folder for select the where you want project 
+Open terminal 
+### 1️⃣ Clone Repository
+```
+git clone https://github.com/codeAshi/Certificate_Verification
+```
+### 2️⃣ Setup Backend
+```
+cd Backend
+npm install
+node server.js
+```
+Backend runs on:
+http://localhost:5000
+### 3️⃣ Setup Frontend
+```
+cd frontend
+npm install
+npm start
+```
+Frontend runs on:
+http://localhost:3000
+👨‍💻 Author
+Ashish Bedare
+B.Tech Computer Engineering
+
+⭐ If you like this project, give it a star.
