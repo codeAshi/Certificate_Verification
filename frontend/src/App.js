@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import CertificateView from "./pages/CertificateView";
+import { useNavigate } from "react-router-dom";
+
+
 
 function App() {
 
   // 🔹 AUTH STATE
+  // const navigate = useNavigate();
   const [mode, setMode] = useState("user");
   const [loggedIn, setLoggedIn] = useState(null);
 
@@ -682,6 +687,13 @@ const deleteCertificate = async (id) => {
   >
     Delete
   </button>
+</td><td>
+  <button
+  className="btn btn-primary btn-sm"
+  onClick={() => navigate(`/certificate/${certificate._id}`)}
+>
+  View
+</button>
 </td>
                   </tr>
                 ))}
