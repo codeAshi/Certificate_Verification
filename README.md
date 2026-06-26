@@ -1,4 +1,4 @@
-# 🎓 Blockchain Certificate Verification System
+# 🎓 Internship Certificate Issuing and Verification System
 
 > 🚧 **Work in Progress**  
 > This project is under active development. Features and UI may change.
